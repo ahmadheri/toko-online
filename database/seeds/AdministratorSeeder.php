@@ -12,12 +12,12 @@ class AdministratorSeeder extends Seeder
     public function run()
     {
         $administrator = new \App\User;
-        $administrator->username = "administrator";
-        $administrator->name = "Site Administrator";
-        $administrator->email = "administrator@larashop";
+        $administrator->username = "administrator1";
+        $administrator->name = "Site Administrator1";
+        $administrator->email = "administrator@larashop.test";
         $administrator->roles = json_encode(['ADMIN']);
         $administrator->password = \Hash::make('larashop');
-        $administrator->phone = '085246821993';
+        $administrator->phone = '085246821992';
         $administrator->avatar = 'saat-ini-tidak-ada-file.png';
         $administrator->address = 'Samarinda, Kaltim';
 
