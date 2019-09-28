@@ -9,8 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Larashop @yield("title")</title>
 <link rel="stylesheet" href="{{asset('polished/polished.min.css')}}">
-<link rel="stylesheet" href="{{asset('polished/iconic/css/open-iconic-
-bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('polished/iconic/css/open-iconic-bootstrap.min.css')}}">
 <style>
   .grid-highlight {
   padding-top: 1rem;
