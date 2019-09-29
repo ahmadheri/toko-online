@@ -29,7 +29,7 @@
 
             </td>
             <td>
-               [TODO: action]
+               <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm">Edit</a>
             </td>
          </tr>
          @endforeach
