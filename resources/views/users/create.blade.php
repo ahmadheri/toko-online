@@ -5,13 +5,20 @@
 @section('content')
 
    <div class="col-md-8">
+
+      @if(session('status'))
+         <div class="alert alert-success">
+            {{ session('status') }}
+         </div>
+      @endif
+
       <form action="{{ route('users.store')}}" method="POST" enctype="multipart/form-data" class="bg-white shadow-sm p-3">
       @csrf
       <label for="name">Name</label>
       <input type="text" class="form-control" name="name" id="name" placeholder="Full Name">
       <br>
       <label for="username">Username</label>
-      <input type="text" class="form-control" name="name" id="name" placeholder="username">
+      <input type="text" class="form-control" name="username" id="username" placeholder="username">
       <br>
       <label for="">Roles</label>
       <br>

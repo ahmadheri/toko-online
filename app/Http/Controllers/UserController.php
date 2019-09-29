@@ -13,7 +13,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = \App\User::paginate(10);
+
+        return view('users.index', ['users' => $users]);
     }
 
     /**
@@ -53,7 +55,7 @@ class UserController extends Controller
 
         $new_user->save();
         return redirect()->route('users.create')->with('status', 'User successfully created');
-        
+
     }
 
     /**
