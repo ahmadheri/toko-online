@@ -91,7 +91,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = \App\User::findOrFail($id);
+
+        $user->name = $request->get('name');
+        $user->roles = json_encode($request->get('roles'));
+        $user->phone = $request->get('phone');
+        $user->address = $request->get('address');
+
+        // cek jika ada file avatar
+        if($user->avatar && file_exists(storage_path('app/public/' . $user->avatar))){
+            \Storage::delete('public/' . $user->avatar); // hapus file gambar jika ada
+            $file = $request->file('avatar')->store('avatars', 'public'); // simpan gambar
+            $user->avatar = $file;
+        } else {
+            $file = $request->file('avatar')->store('avatars', 'public');
+            $user->avatar = $file;
+        }
+
+        $user->save();
+
+        return redirect()->route('users.index', $user->id)->with('status', 'User successfully updated');
+
     }
 
     /**
