@@ -5,6 +5,15 @@
 @section('content')
 
    <table class="table table-bordered">
+
+      @if(session('status'))
+         <div class="alert alert-success">
+            {{session('status')}}
+         </div>
+      @endif
+
+      <a href="{{route('users.create')}}" class="btn btn-primary my-2 float-sm-right">Tambah Data</a>
+
       <thead>
          <tr>
             <th><b>Name</b></th>
@@ -30,7 +39,29 @@
             </td>
             <td>
                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm">Edit</a>
+               <form 
+                  action="{{ route('users.destroy', $user->id)}}"
+                  class="d-inline"
+                  onsubmit="return confirm('Delete this user permanently?')"
+                  method="POST">
+
+                  @csrf
+
+                  <input 
+                     type="hidden"
+                     name="_method"
+                     value="DELETE">
+                  
+                  <input 
+                     type="submit"
+                     value="Delete"
+                     class="btn btn-danger btn-sm">
+
+               </form>
             </td>
+            
+               
+            
          </tr>
          @endforeach
       </tbody>
