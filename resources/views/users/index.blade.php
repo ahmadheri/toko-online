@@ -4,16 +4,42 @@
 
 @section('content')
 
-   <table class="table table-bordered">
+   <h1>Users List</h1>
 
-      @if(session('status'))
-         <div class="alert alert-success">
-            {{session('status')}}
+   @if(session('status'))
+      <div class="alert alert-success">
+         {{session('status')}}
+      </div>
+   @endif
+
+   <div class="row">
+         <div class="col-md-6">
+            <form action="{{ route('users.index') }}">
+               <div class="input-group mb-3">
+                  <input 
+                     type="text"
+                     value="{{ Request::get('keyword') }}"
+                     name="keyword"
+                     class="form-control col-md-10"
+                     placeholder="Filter berdasarkan email">
+                     <div class="input-group-append">
+                        <input 
+                        type="submit"
+                        value="Filter"
+                        class="btn btn-primary">
+                     </div>
+               </div>
+            </form>
          </div>
-      @endif
+      </div>
 
-      <a href="{{route('users.create')}}" class="btn btn-primary my-2 float-sm-right">Tambah Data</a>
+      <div class="row">
+         <div class="col-md-12 text-right">
+            <a href="{{route('users.create')}}" class="btn btn-primary my-2">Create User</a>  
+         </div>
+      </div>
 
+   <table class="table table-bordered">
       <thead>
          <tr>
             <th><b>Name</b></th>
