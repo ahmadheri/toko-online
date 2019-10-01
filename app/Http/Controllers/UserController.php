@@ -13,12 +13,22 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = \App\User::paginate(10);
+        $users = \App\User::paginate(5);
+
+        $status = $request->get('status');
 
         $filterKeyword = $request->get('keyword');
 
+        // %$filterKeyword% harus menggunakan petik dua agar terbaca 
         if($filterKeyword) {
-            $users = \App\User::where('email', 'LIKE', "%$filterKeyword%")->paginate(10); // %$filterKeyword% harus menggunakan petik dua
+            if($status){
+                $users = \App\User::where('email', 'LIKE', "%$filterKeyword%")
+                ->where('status', $status)
+                ->paginate(5);  
+            } else {
+                $usrs = \App\User::where('email', 'LIKE', "%$filterKeyword%")
+                ->paginate(5);
+            }   
         }
 
         return view('users.index', ['users' => $users]);
@@ -60,7 +70,7 @@ class UserController extends Controller
         }
 
         $new_user->save();
-        return redirect()->route('users.create')->with('status', 'User successfully created');
+        return redirect()->route('users.index')->with('status', 'User successfully created');
 
     }
 

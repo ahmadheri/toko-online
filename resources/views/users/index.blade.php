@@ -2,9 +2,9 @@
 
 @section('title') Users list @endsection
 
-@section('content')
+@section('pageTitle') Users list @endsection
 
-   <h1>Users List</h1>
+@section('content')
 
    @if(session('status'))
       <div class="alert alert-success">
@@ -120,6 +120,13 @@
          </tr>
          @endforeach
       </tbody>
+      <tfoot>
+         <tr>
+            <td colspan=5>
+               {{ $users->links() }}
+            </td>
+         </tr>
+      </tfoot>
    </table>
 
 @endsection
