@@ -66,7 +66,7 @@
                      @endif
                   </td>
                   <td>
-                     Todo actions
+                     <a href="{{ route('categories.edit', $category->id)}}" class="btn btn-success btn-sm">Edit</a>
                   </td>
                 </tr>
             @endforeach
