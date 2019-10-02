@@ -31,7 +31,7 @@
    <hr class="my-3">
 
    @if(session('status'))
-      <div class="alert alert-success">
+      <div class="alert alert-success alert-dismissible fade show">
          {{session('status')}}
       </div>
    @endif
@@ -66,7 +66,9 @@
                      @endif
                   </td>
                   <td>
+                     <a href="{{ route('categories.show', $category->id) }}" class="btn btn-secondary btn-sm">Detail</a>
                      <a href="{{ route('categories.edit', $category->id)}}" class="btn btn-success btn-sm">Edit</a>
+                     
                   </td>
                 </tr>
             @endforeach
