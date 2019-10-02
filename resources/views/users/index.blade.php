@@ -1,4 +1,4 @@
-@extends('layouts.global');
+@extends('layouts.global')
 
 @section('title') Users list @endsection
 
