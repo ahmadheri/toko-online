@@ -81,7 +81,7 @@
             </a>
           </li>
           <li>
-              <a href="{{ route('users.index') }}">
+              <a href="{{ route('categories.index') }}">
                 <span class="oi oi-people"></span> Manage Category
               </a>
             </li>
