@@ -63,7 +63,7 @@
                      @endif
                   </td>
                   <td>
-                     TODO
+                     <a href="{{ route('categories.restore', $category->id) }}" class="btn btn-success">Restore</a>
                   </td>
                </tr>
                @endforeach
