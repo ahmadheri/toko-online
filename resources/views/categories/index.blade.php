@@ -36,6 +36,12 @@
       </div>
    @endif
 
+   @if(session('status-warning'))
+      <div class="alert alert-warning alert-dismissible fade show">
+         {{session('status-warning')}}
+      </div>
+   @endif
+
    <div class="row">
       <div class="col-md-12 text-right">
          <a href="{{route('categories.create')}}" class="btn btn-primary my-2">Create Category</a>  
@@ -68,6 +74,23 @@
                   <td>
                      <a href="{{ route('categories.show', $category->id) }}" class="btn btn-secondary btn-sm">Detail</a>
                      <a href="{{ route('categories.edit', $category->id)}}" class="btn btn-success btn-sm">Edit</a>
+
+                     <form action="{{ route('categories.destroy', $category->id) }}"
+                        class="d-inline"
+                        method="POST"
+                        onsubmit="return confirm('Move category to trash ?')">
+
+                        @csrf
+
+                        <input type="hidden" 
+                           value="DELETE"   
+                           name="_method">
+
+                        <input type="submit"
+                           class="btn btn-danger btn-sm"
+                           value="Trash">
+
+                     </form>
                      
                   </td>
                 </tr>
