@@ -13,7 +13,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = \App\Book::paginate(5);
+        $books = \App\Book::with('categories')->paginate(5);
 
         return view('books.index', compact('books'));
     }
