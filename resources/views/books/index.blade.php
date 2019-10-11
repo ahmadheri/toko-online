@@ -14,6 +14,28 @@
    @endif
 
    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-6">
+         <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+               <a href="{{ route('books.index') }}" class="nav-link">All</a>
+            </li>
+            <li class="nav-item">
+               <a href="{{ route('books.index', ['status' => 'publish']) }}" class="nav-link"> Publish</a>
+            </li>
+            <li class="nav-item">
+               <a href="{{ route('books.index', ['status' => 'draft']) }}" class="nav-link">Draft</a>
+            </li>
+            <li class="nav-item">
+               <a href="{{ route('books.trash') }}" class="nav-link">Trash</a>
+            </li>
+         </ul>
+      </div>
+   </div>
+
+   <hr class="my-3">
+
+   <div class="row">
       <div class="col-md-12 text-right">
          <a href="{{route('books.create')}}" class="btn btn-primary my-2">Create Book</a>  
       </div>

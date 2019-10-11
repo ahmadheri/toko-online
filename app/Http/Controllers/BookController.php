@@ -11,9 +11,15 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $books = \App\Book::with('categories')->paginate(5);
+        $status = $request->get('status');
+
+        if($status){
+            $books = \App\Book::with('categories')->where('status', strtoupper($status))->paginate(5);
+        } else {
+            $books = \App\Book::with('categories')->paginate(5);
+        }
 
         return view('books.index', compact('books'));
     }
