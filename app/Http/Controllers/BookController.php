@@ -152,4 +152,11 @@ class BookController extends Controller
 
         return redirect()->route('books.index')->with('status', 'Book move to trash');
     }
+
+    public function trash()
+    {
+        $books = \App\Book::onlyTrashed()->paginate(5);
+
+        return view('books.trash', compact('books'));
+    }
 }
