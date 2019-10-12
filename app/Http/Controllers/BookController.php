@@ -14,11 +14,12 @@ class BookController extends Controller
     public function index(Request $request)
     {
         $status = $request->get('status');
+        $keyword = $request->get('keyword') ? $request->get('keyword') : '' ;
 
         if($status){
-            $books = \App\Book::with('categories')->where('status', strtoupper($status))->paginate(5);
+            $books = \App\Book::with('categories')->where('title', 'LIKE', "%$keyword%")->where('status', strtoupper($status))->paginate(5);
         } else {
-            $books = \App\Book::with('categories')->paginate(5);
+            $books = \App\Book::with('categories')->where('title', 'LIKE', "%$keyword%")->paginate(5);
         }
 
         return view('books.index', compact('books'));
@@ -189,7 +190,7 @@ class BookController extends Controller
         if(!$book->trashed()) {
 
             return redirect()->route('books.trash')->with('status', 'Book is not in trash')->with('status_type', 'alert');
-            
+
         } else {
 
             $book->categories()->detach();
