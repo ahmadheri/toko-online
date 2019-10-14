@@ -8,6 +8,13 @@
 
    <div class="row">
       <div class="col-md-12">
+
+         @if(session('status'))
+         <div class="alert alert-success">
+            {{ session('status') }}
+         </div>
+         @endif
+
          <table class="table table-bordered table-stripped">
             <thead>
                <tr>
@@ -43,7 +50,7 @@
                   <td>{{ $order->created_at }} pc (s)</td>
                   <td>{{ $order->total_price }} pc (s)</td>
                   <td>
-                     TODO
+                     <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-info btn-sm">Edit</a>
                   </td>
                </tr>
                @endforeach
@@ -51,7 +58,7 @@
             <tfoot>
                <tr>
                   <td colspan="5">
-                     {{ $orders->appends(Request::all())->links() }}
+                        {{$orders->appends(Request::all())->links()}}
                   </td>
                </tr>
             </tfoot>
