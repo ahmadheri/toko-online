@@ -9,6 +9,28 @@
    <div class="row">
       <div class="col-md-12">
 
+         <form action="{{ route('orders.index') }}">
+            <div class="row">
+               <div class="col-md-5">
+                  <input value="{{ Request::get('buyer_email') }}" type="text" name="filter" id="filter" class="form-control" placeholder="Search by buyer email">
+               </div>
+               <div class="col-md-2">
+                  <select name="status" id="status" class="form-control">
+                  <option value="">ANY</option>
+                     <option {{ Request::get('status') == 'SUBMIT' ? 'selected' : ''}} value="SUBMIT">SUBMIT</option>
+                     <option {{ Request::get('status') == 'PROCESS' ? 'selected' : ''}} value="PROCESS">PROCESS</option>
+                     <option {{ Request::get('status') == 'FINISH' ? 'selected' : ''}} value="FINISH">FINISH</option>
+                     <option {{ Request::get('status') == 'CANCEL' ? 'selected' : ''}} value="CANCEL">CANCEL</option>
+                  </select>
+               </div>
+               <div class="col-md-2">
+                  <input type="submit" class="btn btn-primary" value="Filter">
+               </div>
+            </div>
+         </form>
+
+         <hr class="my-3">
+
          @if(session('status'))
          <div class="alert alert-success">
             {{ session('status') }}
