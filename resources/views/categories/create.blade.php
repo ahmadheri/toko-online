@@ -18,15 +18,22 @@
       <label for="">Category name</label>
       <input 
          type="text"
-         class="form-control"
-         name="name">
+         class="form-control {{ $errors->first('name') ? 'is-invalid' : '' }}"
+         name="name"
+         value="{{ old('name') }}">
+      <div class="invalid-feedback">
+         {{ $errors->first('name') }}
+      </div>
       <br>
 
       <label for="">Category Image</label>
       <input 
          type="file"
-         class="form-control"
+         class="form-control {{ $errors->first('image') ? 'is-invalid' : '' }}"
          name="image">
+      <div class="invalid-feedback">
+         {{ $errors->first('image') }}
+      </div>
       <br>
 
       <input 
