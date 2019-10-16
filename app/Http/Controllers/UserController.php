@@ -122,19 +122,30 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validation = \Validator::make($request->all(),[
+            'name' => 'required|min:5|max:100',
+            'roles' => 'required',
+            'phone' => 'required|digits_between:10,12',
+            'address' => 'required|min:20|max:200'
+        ])->validate();
+
         $user = \App\User::findOrFail($id);
 
         $user->name = $request->get('name');
         $user->roles = json_encode($request->get('roles'));
         $user->phone = $request->get('phone');
         $user->address = $request->get('address');
+        $user->status = $request->get('status');
 
         // cek jika ada file avatar
-        if($user->avatar && file_exists(storage_path('app/public/' . $user->avatar))){
-            \Storage::delete('public/' . $user->avatar); // hapus file gambar jika ada
-            $file = $request->file('avatar')->store('avatars', 'public'); // simpan gambar
-            $user->avatar = $file;
-        } else {
+        if($request->file('avatar')){
+            
+            if($user->avatar && file_exists(storage_path('app/public/' . $user->avatar))){
+                
+                \Storage::delete('public/' . $user->avatar); // hapus file gambar jika ada
+
+            } 
+
             $file = $request->file('avatar')->store('avatars', 'public');
             $user->avatar = $file;
         }
