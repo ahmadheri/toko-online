@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Validation\Rule;
+
 class CategoryController extends Controller
 {
     /**
@@ -102,10 +104,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $category = \App\Category::findOrFail($id);
+
+        \Validator::make($request->all(), [
+            'name' => 'required|min:3|max:20',
+            'image' => 'required',
+            'slug' => [
+                'required',
+                Rule::unique('categories')->ignore($category->slug, 'slug')]
+        ])->validate();
+
+
         $name = $request->get('name');
         $slug = $request->get('slug');
-
-        $category = \App\Category::findOrFail($id);
 
         $category->name = $name;
         $category->slug = $slug;
@@ -120,7 +131,7 @@ class CategoryController extends Controller
             $category->image = $new_image;
         }
 
-        $category->update_by = \Auth::user()->id;
+        $category->updated_by = \Auth::user()->id;
 
         $category->slug = \Str::slug($name);
 
